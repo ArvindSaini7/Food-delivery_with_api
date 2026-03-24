@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Food Hut - Menu</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --primary:#ef3e5b;
+      --primary-dark:#d82d49;
+      --secondary:#3c1c63;
+      --secondary-light:#5b2f8f;
+      --text:#2d2540;
+      --muted:#766f87;
+      --bg:#f7f7fb;
+      --white:#ffffff;
+      --border:#ece7f5;
+      --shadow:0 14px 40px rgba(45, 27, 84, 0.08);
+      --radius:28px;
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      background:
+        radial-gradient(circle at top left, rgba(239,62,91,0.08), transparent 22%),
+        radial-gradient(circle at bottom right, rgba(60,28,99,0.08), transparent 24%),
+        var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    .container{
+      width:min(1320px, calc(100% - 40px));
+      margin:0 auto;
+    }
+
+    /* NAVBAR */
+    .navbar-wrap{
+      position:sticky;
+      top:0;
+      z-index:999;
+      background:rgba(247,247,251,0.92);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(236,231,245,0.8);
+    }
+
+    .navbar{
+      min-height:88px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-size:2rem;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    .logo-icon{
+      font-size:1.9rem;
+    }
+
+    .logo .food{
+      color:var(--primary);
+    }
+
+    .logo .hut{
+      color:var(--secondary);
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:34px;
+      flex-wrap:wrap;
+    }
+
+    .nav-links a{
+      position:relative;
+      color:#625d72;
+      font-weight:500;
+      font-size:1rem;
+      transition:.25s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active{
+      color:var(--primary);
+    }
+
+    .nav-links a.active::after,
+    .nav-links a:hover::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-11px;
+      width:100%;
+      height:2px;
+      background:var(--primary);
+      border-radius:999px;
+    }
+
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .icon-btn{
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      border:1px solid var(--border);
+      background:var(--white);
+      box-shadow:var(--shadow);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1.1rem;
+      cursor:pointer;
+      transition:.25s;
+    }
+
+    .icon-btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .login-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:112px;
+      padding:14px 24px;
+      border-radius:999px;
+      background:linear-gradient(135deg, var(--primary), #ff6b7d);
+      color:var(--white);
+      font-weight:700;
+      box-shadow:0 12px 26px rgba(239,62,91,0.24);
+      transition:.25s;
+    }
+
+    .login-btn:hover{
+      transform:translateY(-2px);
+    }
+
+    /* HERO */
+    .hero{
+      padding:34px 0 24px;
+    }
+
+    .hero-card{
+      position:relative;
+      overflow:hidden;
+      min-height:420px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.96), rgba(246,255,249,0.88));
+      border:1px solid var(--border);
+      border-radius:34px;
+      box-shadow:var(--shadow);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:70px 24px;
+    }
+
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      left:-90px;
+      bottom:40px;
+      width:280px;
+      height:280px;
+      background:radial-gradient(circle, rgba(239,62,91,0.14), transparent 65%);
+    }
+
+    .hero-card::after{
+      content:"";
+      position:absolute;
+      right:-70px;
+      top:70px;
+      width:300px;
+      height:300px;
+      background:radial-gradient(circle, rgba(64,196,99,0.12), transparent 65%);
+    }
+
+    .floating{
+      position:absolute;
+      opacity:.16;
+      font-size:2rem;
+      user-select:none;
+      pointer-events:none;
+    }
+
+    .f1{ left:68px; top:120px; transform:rotate(-18deg);}
+    .f2{ right:100px; top:145px; transform:rotate(14deg);}
+    .f3{ left:92px; bottom:74px; transform:rotate(18deg);}
+    .f4{ right:120px; bottom:76px; transform:rotate(-12deg);}
+
+    .hero-content{
+      position:relative;
+      z-index:2;
+      max-width:920px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:#ecf9ee;
+      color:#25a24a;
+      padding:12px 20px;
+      border-radius:999px;
+      font-size:.98rem;
+      font-weight:600;
+      margin-bottom:22px;
+    }
+
+    .badge-dot{
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      background:linear-gradient(135deg, #61d98a, #1ea74f);
+      box-shadow:0 0 0 5px rgba(97,217,138,.16);
+    }
+
+    .hero h1{
+      font-size:clamp(2.2rem, 6vw, 4.5rem);
+      line-height:1.08;
+      font-weight:800;
+      letter-spacing:-1px;
+      color:var(--secondary);
+      margin-bottom:18px;
+    }
+
+    .hero h1 span{
+      color:var(--primary);
+    }
+
+    .hero p{
+      max-width:790px;
+      margin:0 auto;
+      color:var(--muted);
+      font-size:1.08rem;
+      line-height:1.9;
+    }
+
+    /* SECTION */
+    .section-heading{
+      width:min(1320px, calc(100% - 40px));
+      margin:38px auto 22px;
+      text-align:center;
+    }
+
+    .section-heading h3{
+      font-size:clamp(2rem, 4vw, 3rem);
+      color:var(--secondary);
+      font-weight:800;
+      margin-bottom:8px;
+    }
+
+    .section-heading p{
+      font-size:1rem;
+      color:var(--muted);
+      line-height:1.8;
+    }
+
+    /* FOOD GRID */
+    #foodList{
+      width:min(1320px, calc(100% - 40px));
+      margin:30px auto 70px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(290px, 1fr));
+      gap:28px;
+    }
+
+    .food-card{
+      background:rgba(255,255,255,0.97);
+      border:1px solid var(--border);
+      border-radius:28px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      transition:.3s;
+    }
+
+    .food-card:hover{
+      transform:translateY(-8px);
+    }
+
+    .image-wrap{
+      position:relative;
+      overflow:hidden;
+      cursor:pointer;
+    }
+
+    .food-card img{
+      width:100%;
+      height:240px;
+      object-fit:cover;
+      display:block;
+      transition:.35s;
+    }
+
+    .food-card:hover img{
+      transform:scale(1.05);
+    }
+
+    .zoom-badge{
+      position:absolute;
+      top:14px;
+      right:14px;
+      background:rgba(255,255,255,0.92);
+      color:var(--secondary);
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+      box-shadow:0 8px 18px rgba(0,0,0,0.08);
+    }
+
+    .content{
+      padding:22px 20px 20px;
+    }
+
+    .content h3{
+      font-size:1.4rem;
+      color:var(--secondary);
+      margin-bottom:10px;
+      font-weight:700;
+    }
+
+    .restaurant{
+      color:var(--primary);
+      font-size:15px;
+      font-weight:700;
+      margin-bottom:8px;
+    }
+
+    .category{
+      color:#766f87;
+      font-size:14px;
+      margin-bottom:18px;
+      background:#fff1f4;
+      display:inline-block;
+      padding:7px 14px;
+      border-radius:20px;
+      font-weight:600;
+    }
+
+    .price-order{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    .price-btn{
+      background:linear-gradient(135deg, var(--secondary), var(--secondary-light));
+      color:white;
+      border:none;
+      padding:11px 18px;
+      border-radius:30px;
+      font-size:15px;
+      font-weight:700;
+      box-shadow:0 8px 18px rgba(60,28,99,0.22);
+      cursor:default;
+    }
+
+    .order-btn{
+      background:linear-gradient(135deg, var(--primary), #ff6d7e);
+      color:white;
+      padding:12px 22px;
+      border-radius:30px;
+      font-weight:700;
+      transition:0.3s ease;
+      box-shadow:0 8px 18px rgba(239,62,91,0.22);
+      display:inline-block;
+    }
+
+    .order-btn:hover{
+      transform:scale(1.05);
+      box-shadow:0 10px 22px rgba(239,62,91,0.32);
+    }
+
+    .status-message{
+      width:100%;
+      text-align:center;
+      font-size:18px;
+      color:#666;
+      padding:34px 16px;
+      background:rgba(255,255,255,0.9);
+      border-radius:22px;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      grid-column:1/-1;
+    }
+
+    /* IMAGE MODAL */
+    .image-modal{
+      position:fixed;
+      inset:0;
+      background:rgba(10,10,20,0.78);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:99999;
+      padding:20px;
+      backdrop-filter:blur(5px);
+    }
+
+    .image-modal.show{
+      display:flex;
+    }
+
+    .image-modal-content{
+      position:relative;
+      max-width:900px;
+      width:100%;
+      animation:zoomIn .25s ease;
+    }
+
+    .image-modal img{
+      width:100%;
+      max-height:82vh;
+      object-fit:contain;
+      border-radius:20px;
+      box-shadow:0 20px 60px rgba(0,0,0,0.35);
+      background:#fff;
+    }
+
+    .close-modal{
+      position:absolute;
+      top:-14px;
+      right:-6px;
+      width:42px;
+      height:42px;
+      border:none;
+      border-radius:50%;
+      background:#fff;
+      color:var(--secondary);
+      font-size:24px;
+      font-weight:700;
+      cursor:pointer;
+      box-shadow:0 10px 24px rgba(0,0,0,0.22);
+    }
+
+    @keyframes zoomIn{
+      from{
+        opacity:0;
+        transform:scale(.92);
+      }
+      to{
+        opacity:1;
+        transform:scale(1);
+      }
+    }
+
+    /* FOOTER */
+    footer{
+      width:min(1320px, calc(100% - 40px));
+      margin:0 auto 20px;
+      background:#221533;
+      color:#fff;
+      text-align:center;
+      padding:24px 20px;
+      font-size:16px;
+      border-radius:22px;
+      box-shadow:0 10px 28px rgba(0,0,0,0.10);
+    }
+
+    footer span{
+      color:#ff6f82;
+      font-weight:700;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px){
+      .navbar{
+        flex-wrap:wrap;
+        justify-content:center;
+        padding:16px 0;
+      }
+
+      .nav-links{
+        width:100%;
+        justify-content:center;
+      }
+
+      .hero-card{
+        min-height:auto;
+        padding:60px 20px;
+      }
+    }
+
+    @media (max-width: 640px){
+      .container{
+        width:min(100% - 24px, 1320px);
+      }
+
+      .logo{
+        font-size:1.7rem;
+      }
+
+      .nav-links{
+        gap:18px;
+        flex-wrap:wrap;
+      }
+
+      .nav-actions{
+        width:100%;
+        justify-content:center;
+      }
+
+      .hero{
+        padding-top:22px;
+      }
+
+      .hero-card{
+        border-radius:24px;
+        padding:48px 16px;
+      }
+
+      .badge{
+        font-size:.84rem;
+        padding:10px 16px;
+      }
+
+      .hero p{
+        font-size:1rem;
+      }
+
+      .food-card img{
+        height:220px;
+      }
+
+      .price-order{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .order-btn{
+        width:100%;
+        text-align:center;
+      }
+
+      .close-modal{
+        top:10px;
+        right:10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar-wrap">
+    <div class="container">
+      <div class="navbar">
+        <a href="/" class="logo">
+          <span class="logo-icon">🍕</span>
+          <span class="food">Food</span><span class="hut">Wala</span>
+        </a>
+
+        <div class="nav-links">
+          <a href="/">Home</a>
+          <a href="/MenuButton" class="active">Menu</a>
+          <a href="/AboutPage">About</a>
+          <a href="/ContactPage">Contact</a>
+        </div>
+
+        <div class="nav-actions">
+          <button class="icon-btn" title="Cart">🛒</button>
+          <a href="/loginn" class="login-btn">Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-card">
+        <div class="floating f1">🌶️</div>
+        <div class="floating f2">🍔</div>
+        <div class="floating f3">🍰</div>
+        <div class="floating f4">🍕</div>
+
+        <div class="hero-content">
+          <div class="badge">
+            <span class="badge-dot"></span>
+            Delicious Menu Collection
+          </div>
+
+          <h1>Choose Your <span>Favorite Food</span></h1>
+
+          <p>
+            Discover mouth-watering dishes from top restaurants near you. Fresh flavors,
+            fast delivery, and a premium food experience in one place.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-heading">
+    <h3>Popular Dishes</h3>
+    <p>Choose your favorite meal and click any image to see it in larger view.</p>
+  </div>
+
+  <div id="foodList">
+    <p class="status-message">Loading delicious food items...</p>
+  </div>
+
+  <!-- IMAGE PREVIEW MODAL -->
+  <div class="image-modal" id="imageModal">
+    <div class="image-modal-content">
+      <button class="close-modal" onclick="closeImageModal()">×</button>
+      <img id="modalImage" src="" alt="Food Preview">
+    </div>
+  </div>
+
+  <script>
+    function openImageModal(imageSrc) {
+      document.getElementById("modalImage").src = imageSrc;
+      document.getElementById("imageModal").classList.add("show");
+    }
+
+    function closeImageModal() {
+      document.getElementById("imageModal").classList.remove("show");
+      document.getElementById("modalImage").src = "";
+    }
+
+    fetch('/all')
+      .then(res => {
+        if (!res.ok) {
+          throw new Error("HTTP error " + res.status);
+        }
+        return res.json();
+      })
+      .then(data => {
+        console.log("API DATA:", data);
+
+        const foodList = document.getElementById("foodList");
+        foodList.innerHTML = "";
+
+        if (!data || data.length === 0) {
+          foodList.innerHTML = `<p class="status-message">No food items available.</p>`;
+          return;
+        }
+
+        data.forEach(item => {
+          const imagePath = item.image
+            ? item.image
+            : "https://via.placeholder.com/600x400?text=No+Image";
+
+          foodList.innerHTML += `
+            <div class="food-card">
+              <div class="image-wrap" onclick="openImageModal('${imagePath}')">
+                <img src="${imagePath}" alt="${item.name}">
+                <div class="zoom-badge">View</div>
+              </div>
+              <div class="content">
+                <h3>${item.name || 'Food Item'}</h3>
+                <p class="restaurant">${item.restaurantsName || 'Restaurant'}</p>
+                <p class="category">${item.category || 'Category'}</p>
+                <div class="price-order">
+                  <button class="price-btn">₹ ${item.MRP || 0}</button>
+                  <a href="/userDetails" class="order-btn">Order Now</a>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+      })
+      .catch(err => {
+        console.error("FETCH ERROR:", err);
+        document.getElementById("foodList").innerHTML = `
+          <p class="status-message">Failed to load food items. Please check API or backend server.</p>
+        `;
+      });
+
+    window.addEventListener("click", function(event) {
+      const imageModal = document.getElementById("imageModal");
+      if (event.target === imageModal) {
+        closeImageModal();
+      }
+    });
+  </script>
+
+  <footer>
+    <p>© 2026 <span>FoodWala</span>. All Rights Reserved.</p>
+  </footer>
+
+</body>
+</html>

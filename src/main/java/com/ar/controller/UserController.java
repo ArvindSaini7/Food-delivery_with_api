@@ -17,6 +17,8 @@ import com.ar.repo.MenuRepo;
 import com.ar.repo.OrderRepository;
 import com.ar.service.UserDetaileSerview;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class UserController {
 	@Autowired
@@ -39,12 +41,27 @@ public class UserController {
 		return "userDetails";
 	}
 	
+//	@PostMapping("/userDetails")
+//	public String addUser(@ModelAttribute UserDetails details) {
+//		userDetaileSerview.saveDetails(details);
+//		return "foodlist";
+//		
+//	}
 	@PostMapping("/userDetails")
-	public String addUser(@ModelAttribute UserDetails details) {
+	public String saveUser(@ModelAttribute UserDetails details, HttpSession session) {
 		userDetaileSerview.saveDetails(details);
-		return "foodlist";
-		
+	    session.setAttribute("user", details);
+
+	    Integer selectedFoodId = (Integer) session.getAttribute("selectedFoodId");
+	    if (selectedFoodId != null) {
+	        return "redirect:/food-details";
+	    }
+
+	    return "redirect:/";
 	}
+	
+	
+	
 	
 	
 

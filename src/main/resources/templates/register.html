@@ -1,27 +1,162 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Restaurant Register</title>
+<meta charset="UTF-8">
+<title>Restaurant Register | Foodies</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* 🔥 BEST RESTAURANT BACKGROUND */
+    background: linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.70)),
+    url("https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1400&q=80")
+    no-repeat center center/cover;
+}
+
+/* Container */
+.register-container {
+    width: 100%;
+    max-width: 440px;
+    padding: 40px 30px;
+
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border-radius: 22px;
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.35);
+    text-align: center;
+}
+
+/* Title */
+.register-container h2 {
+    color: #fff;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #eee;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+/* Inputs */
+.input-box {
+    margin-bottom: 18px;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    background: rgba(255,255,255,0.95);
+}
+
+/* Button */
+.register-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #ff512f, #ff7b54);
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease;
+    box-shadow: 0 10px 20px rgba(255,81,47,0.3);
+}
+
+.register-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Login Link */
+.login-link {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #eee;
+}
+
+.login-link a {
+    color: #00cec9;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* Error */
+.error {
+    margin-top: 15px;
+    color: #ffb3b3;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media(max-width:500px){
+    .register-container {
+        margin: 0 15px;
+        padding: 30px 20px;
+    }
+}
+</style>
 </head>
+
 <body>
 
-<h2>Restaurant Registration</h2>
+<div class="register-container">
+    <h2>Restaurant Registration</h2>
+    <p class="subtitle">Create your restaurant account and start serving customers.</p>
 
-<form th:action="@{/register}" th:object="${restaurant}" method="post">
+    <form th:action="@{/register}" th:object="${restaurant}" method="post">
 
-    <input type="text" th:field="*{restaurantName}"
-           placeholder="Restaurant Name" required><br><br>
+        <div class="input-box">
+            <input type="text" th:field="*{restaurantName}"
+                   placeholder="Restaurant Name" required>
+        </div>
 
-    <input type="text" th:field="*{username}"
-           placeholder="Username" required><br><br>
+        <div class="input-box">
+            <input type="text" th:field="*{username}"
+                   placeholder="Username" required>
+        </div>
 
-    <input type="password" th:field="*{password}"
-           placeholder="Password" required><br><br>
+        <div class="input-box">
+            <input type="password" th:field="*{password}"
+                   placeholder="Password" required>
+        </div>
 
-    <button type="submit">Register</button>
-</form>
+        <button type="submit" class="register-btn">Register</button>
+    </form>
 
-<p style="color:red" th:text="${error}"></p>
+    <div class="login-link">
+        Already have an account?
+        <a href="/loginn">Login</a>
+    </div>
+
+    <p class="error" th:text="${error}"></p>
+</div>
 
 </body>
 </html>

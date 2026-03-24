@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Add Menu | Foodies</title>
+<title>Edit Menu | Foodies</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -21,14 +21,15 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    background: linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.70)),
+    background:
+    linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.70)),
     url("https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=1400&q=80")
     no-repeat center center/cover;
 }
 
 .container {
     width: 100%;
-    max-width: 460px;
+    max-width: 500px;
     padding: 35px 30px;
     background: rgba(255,255,255,0.15);
     backdrop-filter: blur(14px);
@@ -44,7 +45,6 @@ body {
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 8px;
-    letter-spacing: 0.5px;
 }
 
 .subtitle {
@@ -76,10 +76,6 @@ body {
     font-size: 14px;
     background: rgba(255,255,255,0.95);
     color: #333;
-}
-
-.input-box input::placeholder {
-    color: #666;
 }
 
 .input-box select {
@@ -124,23 +120,67 @@ body {
     cursor: pointer;
 }
 
-.submit-btn {
+.preview-box {
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+.preview-box label {
+    color: #fff;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.preview-img {
     width: 100%;
+    max-width: 180px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 2px solid rgba(255,255,255,0.5);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.20);
+}
+
+.button-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.update-btn,
+.cancel-btn {
+    flex: 1;
+    text-decoration: none;
+    text-align: center;
     padding: 14px;
     border: none;
     border-radius: 30px;
     font-size: 16px;
     font-weight: 600;
-    background: linear-gradient(135deg, #00b894, #00cec9);
-    color: white;
     cursor: pointer;
     transition: 0.3s ease;
+}
+
+.update-btn {
+    background: linear-gradient(135deg, #00b894, #00cec9);
+    color: white;
     box-shadow: 0 10px 20px rgba(0,184,148,0.3);
 }
 
-.submit-btn:hover {
+.update-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 14px 24px rgba(0,184,148,0.38);
+}
+
+.cancel-btn {
+    background: linear-gradient(135deg, #636e72, #2d3436);
+    color: white;
+    box-shadow: 0 10px 20px rgba(45,52,54,0.28);
+}
+
+.cancel-btn:hover {
+    transform: translateY(-2px);
 }
 
 .note {
@@ -162,34 +202,33 @@ body {
     .container h2 {
         font-size: 24px;
     }
+
+    .button-group {
+        flex-direction: column;
+    }
 }
 </style>
 </head>
-
 <body>
 
 <div class="container">
 
-    <!-- Static restaurant name -->
     <div class="restaurant-name">My Restaurant 🍽️</div>
+    <!-- Dynamic:
+    <div class="restaurant-name" th:text="${restaurantName}"></div>
+    -->
 
-    <!-- Dynamic restaurant name (use this if passing from backend) -->
-    <div class="restaurant-name" th:text="${restaurantName}"></div> 
+    <p class="subtitle">Update your dish details and keep your menu fresh.</p>
 
-    <p class="subtitle">Add your delicious dishes and manage your menu beautifully.</p>
+    <h2>Edit Menu Item</h2>
 
-    <h2>Add Menu Item</h2>
+    <form th:action="@{/updateMenu}" th:object="${menu}" method="post" enctype="multipart/form-data">
 
-    <form th:action="@{/addMenu}"
-          th:object="${menu}"
-          method="post"
-          enctype="multipart/form-data">
+        <!-- Hidden id -->
+        <input type="hidden" th:field="*{id}">
 
         <div class="input-box">
-            <input type="text"
-                   th:field="*{name}"
-                   placeholder="Food Name"
-                   required>
+            <input type="text" th:field="*{name}" placeholder="Food Name" required>
         </div>
 
         <div class="input-box select-box">
@@ -203,24 +242,26 @@ body {
         </div>
 
         <div class="input-box">
-            <input type="number"
-                   th:field="*{MRP}"
-                   placeholder="Price (₹)"
-                   required>
+            <input type="number" th:field="*{MRP}" placeholder="Price (₹)" required>
+        </div>
+
+        <div class="preview-box">
+            <label>Current Food Image</label>
+            <img th:src="@{${menu.image}}" alt="Current Food Image" class="preview-img">
         </div>
 
         <div class="file-box">
-            <label for="imageFile">Upload Food Image</label>
-            <input type="file"
-                   id="imageFile"
-                   name="imageFile"
-                   accept="image/*">
+            <label for="imageFile">Change Food Image</label>
+            <input type="file" id="imageFile" name="imageFile" accept="image/*">
         </div>
 
-        <button type="submit" class="submit-btn">Save Menu Item</button>
+        <div class="button-group">
+            <button type="submit" class="update-btn">Update Menu Item</button>
+            <a href="http://localhost:8182/EditMenuPage" class="cancel-btn">Cancel</a>
+        </div>
     </form>
 
-    <p class="note">Make your menu look attractive for your customers.</p>
+    <p class="note">Keep your menu updated for a better customer experience.</p>
 
 </div>
 

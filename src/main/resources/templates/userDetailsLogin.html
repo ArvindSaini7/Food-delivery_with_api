@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>User Login | Foodies</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.70)),
+    url("https://images.unsplash.com/photo-1521305916504-4a1121188589?auto=format&fit=crop&w=1400&q=80")
+    no-repeat center center/cover;
+}
+
+.container{
+    width:100%;
+    max-width:430px;
+    padding:40px 30px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius:22px;
+    border:1px solid rgba(255,255,255,0.25);
+    box-shadow:0 20px 45px rgba(0,0,0,0.35);
+    text-align:center;
+}
+
+.container h2{
+    color:#fff;
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:#eee;
+    font-size:14px;
+    margin-bottom:25px;
+}
+
+.input-box{
+    margin-bottom:18px;
+}
+
+.input-box input{
+    width:100%;
+    padding:14px 16px;
+    border-radius:12px;
+    border:none;
+    outline:none;
+    font-size:15px;
+    background: rgba(255,255,255,0.95);
+}
+
+.login-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:30px;
+    font-size:16px;
+    font-weight:600;
+    background: linear-gradient(135deg, #ff512f, #ff7b54);
+    color:white;
+    cursor:pointer;
+    transition:0.3s ease;
+    box-shadow:0 10px 20px rgba(255,81,47,0.3);
+}
+
+.login-btn:hover{
+    transform: translateY(-2px);
+}
+
+.register-link{
+    margin-top:20px;
+    font-size:14px;
+    color:#eee;
+}
+
+.register-link a{
+    color:#00cec9;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.register-link a:hover{
+    text-decoration:underline;
+}
+
+.error{
+    color:#ffcccc;
+    margin-bottom:12px;
+    font-size:14px;
+}
+
+@media(max-width:500px){
+    .container{
+        margin:0 15px;
+        padding:30px 20px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>User Login</h2>
+    <p class="subtitle">Login to continue your food journey.</p>
+
+    <p class="error" th:if="${error}" th:text="${error}"></p>
+
+    <form th:action="@{/userDetailsLogin}" method="post">
+        <div class="input-box">
+            <input type="text" name="mobileno" placeholder="Enter Mobile Number" required>
+        </div>
+
+        <div class="input-box">
+            <input type="password" name="password" placeholder="Enter Password" required>
+        </div>
+
+        <button type="submit" class="login-btn">Login</button>
+    </form>
+
+    <div class="register-link">
+        Don’t have an account?
+        <a th:href="@{/userDetails}">Register</a>
+    </div>
+</div>
+
+</body>
+</html>

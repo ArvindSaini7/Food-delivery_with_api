@@ -1,34 +1,290 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>My Menu</title>
+<meta charset="UTF-8">
+<title>My Menu | Foodies</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    padding: 30px 20px;
+    background:
+    linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.70)),
+    url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&q=80")
+    no-repeat center center/cover;
+}
+
+.page-wrapper {
+    max-width: 1250px;
+    margin: auto;
+}
+
+.top-bar {
+    text-align: center;
+    color: white;
+    margin-bottom: 25px;
+}
+
+.top-bar h2 {
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.top-bar p {
+    font-size: 15px;
+    color: #f1f1f1;
+    opacity: 0.95;
+}
+
+.menu-container {
+    background: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.20);
+    border-radius: 24px;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.30);
+    padding: 25px;
+    overflow-x: auto;
+}
+
+.table-title {
+    color: white;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 18px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.96);
+}
+
+thead {
+    background: linear-gradient(135deg, #ff512f, #ff7b54);
+    color: white;
+}
+
+thead th {
+    padding: 16px 14px;
+    font-size: 15px;
+    text-align: left;
+    font-weight: 600;
+}
+
+tbody tr {
+    transition: 0.3s ease;
+    border-bottom: 1px solid #eee;
+}
+
+tbody tr:hover {
+    background: #fff7f3;
+}
+
+tbody td {
+    padding: 14px;
+    font-size: 14px;
+    color: #333;
+    vertical-align: middle;
+}
+
+.food-img {
+    width: 85px;
+    height: 65px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid #f1f1f1;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.10);
+}
+
+.category-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    background: #fff1eb;
+    color: #ff5a1f;
+}
+
+.price {
+    font-weight: 700;
+    color: #1f1f1f;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.edit-btn,
+.delete-btn {
+    text-decoration: none;
+    padding: 9px 14px;
+    border-radius: 22px;
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+    transition: 0.3s ease;
+    display: inline-block;
+}
+
+.edit-btn {
+    background: linear-gradient(135deg, #4facfe, #00c6ff);
+    box-shadow: 0 8px 16px rgba(79, 172, 254, 0.22);
+}
+
+.edit-btn:hover {
+    transform: translateY(-2px);
+}
+
+.delete-btn {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    box-shadow: 0 8px 16px rgba(255, 65, 108, 0.22);
+}
+
+.delete-btn:hover {
+    transform: translateY(-2px);
+}
+
+.empty-box {
+    background: rgba(255,255,255,0.94);
+    border-radius: 18px;
+    padding: 30px;
+    text-align: center;
+    color: #555;
+    font-size: 16px;
+}
+
+.top-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 18px;
+}
+
+.add-btn {
+    text-decoration: none;
+    background: linear-gradient(135deg, #00b894, #00cec9);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 28px;
+    font-weight: 600;
+    box-shadow: 0 10px 20px rgba(0,184,148,0.22);
+    transition: 0.3s ease;
+}
+
+.add-btn:hover {
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .top-bar h2 {
+        font-size: 28px;
+    }
+
+    .menu-container {
+        padding: 16px;
+    }
+
+    thead th,
+    tbody td {
+        padding: 12px 10px;
+        font-size: 13px;
+    }
+
+    .food-img {
+        width: 72px;
+        height: 55px;
+    }
+
+    .edit-btn,
+    .delete-btn {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+}
+</style>
 </head>
 <body>
 
-<h2>My Menu Items</h2>
+<div class="page-wrapper">
 
-<table border="1" cellpadding="8">
-    <tr>
-        <th>Restaurant</th>
-        <th>Name</th>
-        <th>Category</th>
-        <th>MRP</th>
-        <th>Image</th>
-    </tr>
+    <div class="top-bar">
+        <h2>My Menu Items</h2>
+        <p>Manage your restaurant menu, update dishes, and remove unavailable items.</p>
+    </div>
 
-    <tr th:each="m : ${menuList}">
-        <td th:text="${m.restaurantsName}"></td>
-        <td th:text="${m.name}"></td>
-        <td th:text="${m.category}"></td>
+    <div class="menu-container">
+        <div class="top-actions">
+            <a href="/add" class="add-btn">+ Add New Item</a>
+        </div>
 
-        <!-- Java field name should be mrp, not MRP -->
-        <td th:text="${m.MRP}"></td>
+        <div class="table-title">Restaurant Menu List</div>
 
-        <td>
-            <img th:src="@{${m.image}}" width="70">
-        </td>
-    </tr>
-</table>
+        <div th:if="${#lists.isEmpty(menuList)}" class="empty-box">
+            No menu items available yet. Start by adding your first delicious dish.
+        </div>
+
+        <table th:if="${not #lists.isEmpty(menuList)}">
+            <thead>
+                <tr>
+                    <th>Restaurant</th>
+                    <th>Food Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="m : ${menuList}">
+                    <td th:text="${m.restaurantsName}"></td>
+                    <td th:text="${m.name}"></td>
+
+                    <td>
+                        <span class="category-badge" th:text="${m.category}"></span>
+                    </td>
+
+                    <td class="price">₹ <span th:text="${m.MRP}"></span></td>
+
+                    <td>
+                        <img th:src="@{${m.image}}" alt="Food Image" class="food-img">
+                    </td>
+
+                    <td>
+                        <div class="action-buttons">
+                            <!-- Change URL according to your backend -->
+                            <a th:href="@{'/editMenu/' + ${m.id}}" class="edit-btn">Edit</a>
+
+                            <!-- Change URL according to your backend -->
+                            <a th:href="@{'/deleteMenu/' + ${m.id}}"
+                               class="delete-btn"
+                               onclick="return confirm('Are you sure you want to delete this menu item?')">
+                               Delete
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
 
 </body>
 </html>

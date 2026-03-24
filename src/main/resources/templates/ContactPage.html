@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - FoodWala Private Limited</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --primary:#ef3e5b;
+      --primary-dark:#d82d49;
+      --secondary:#3c1c63;
+      --secondary-light:#5b2f8f;
+      --text:#2d2540;
+      --muted:#766f87;
+      --bg:#f7f7fb;
+      --white:#ffffff;
+      --border:#ece7f5;
+      --shadow:0 14px 40px rgba(45, 27, 84, 0.08);
+      --radius:28px;
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      background:
+        radial-gradient(circle at top left, rgba(239,62,91,0.08), transparent 22%),
+        radial-gradient(circle at bottom right, rgba(60,28,99,0.08), transparent 24%),
+        var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    .container{
+      width:min(1320px, calc(100% - 40px));
+      margin:0 auto;
+    }
+
+    /* NAVBAR */
+    .navbar-wrap{
+      position:sticky;
+      top:0;
+      z-index:999;
+      background:rgba(247,247,251,0.92);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(236,231,245,0.8);
+    }
+
+    .navbar{
+      min-height:88px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-size:2rem;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    .logo-icon{
+      font-size:1.9rem;
+    }
+
+    .logo .food{
+      color:var(--primary);
+    }
+
+    .logo .hut{
+      color:var(--secondary);
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:34px;
+    }
+
+    .nav-links a{
+      position:relative;
+      color:#625d72;
+      font-weight:500;
+      font-size:1rem;
+      transition:.25s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active{
+      color:var(--primary);
+    }
+
+    .nav-links a.active::after,
+    .nav-links a:hover::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-11px;
+      width:100%;
+      height:2px;
+      background:var(--primary);
+      border-radius:999px;
+    }
+
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .icon-btn{
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      border:1px solid var(--border);
+      background:var(--white);
+      box-shadow:var(--shadow);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1.1rem;
+      cursor:pointer;
+      transition:.25s;
+    }
+
+    .icon-btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .login-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:112px;
+      padding:14px 24px;
+      border-radius:999px;
+      background:linear-gradient(135deg, var(--primary), #ff6b7d);
+      color:var(--white);
+      font-weight:700;
+      box-shadow:0 12px 26px rgba(239,62,91,0.24);
+      transition:.25s;
+    }
+
+    .login-btn:hover{
+      transform:translateY(-2px);
+    }
+
+    /* HERO */
+    .hero{
+      padding:34px 0 24px;
+    }
+
+    .hero-card{
+      position:relative;
+      overflow:hidden;
+      min-height:460px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.96), rgba(246,255,249,0.88));
+      border:1px solid var(--border);
+      border-radius:34px;
+      box-shadow:var(--shadow);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:72px 24px;
+    }
+
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      left:-90px;
+      bottom:40px;
+      width:280px;
+      height:280px;
+      background:radial-gradient(circle, rgba(239,62,91,0.14), transparent 65%);
+    }
+
+    .hero-card::after{
+      content:"";
+      position:absolute;
+      right:-70px;
+      top:70px;
+      width:300px;
+      height:300px;
+      background:radial-gradient(circle, rgba(64,196,99,0.12), transparent 65%);
+    }
+
+    .floating{
+      position:absolute;
+      opacity:.16;
+      font-size:2rem;
+      user-select:none;
+      pointer-events:none;
+    }
+
+    .f1{ left:68px; top:120px; transform:rotate(-18deg);}
+    .f2{ right:100px; top:145px; transform:rotate(14deg);}
+    .f3{ left:92px; bottom:74px; transform:rotate(18deg);}
+    .f4{ right:120px; bottom:76px; transform:rotate(-12deg);}
+
+    .hero-content{
+      position:relative;
+      z-index:2;
+      max-width:950px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:#ecf9ee;
+      color:#25a24a;
+      padding:12px 20px;
+      border-radius:999px;
+      font-size:.98rem;
+      font-weight:600;
+      margin-bottom:22px;
+    }
+
+    .badge-dot{
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      background:linear-gradient(135deg, #61d98a, #1ea74f);
+      box-shadow:0 0 0 5px rgba(97,217,138,.16);
+    }
+
+    .hero h1{
+      font-size:clamp(2.2rem, 6vw, 4.7rem);
+      line-height:1.08;
+      font-weight:800;
+      letter-spacing:-1px;
+      color:var(--secondary);
+      margin-bottom:18px;
+    }
+
+    .hero h1 span{
+      color:var(--primary);
+    }
+
+    .hero p{
+      max-width:800px;
+      margin:0 auto;
+      color:var(--muted);
+      font-size:1.08rem;
+      line-height:1.9;
+    }
+
+    /* CONTENT */
+    .contact-section{
+      padding:56px 0 90px;
+    }
+
+    .section-head{
+      text-align:center;
+      margin-bottom:34px;
+    }
+
+    .section-head h2{
+      font-size:clamp(2rem, 4vw, 3rem);
+      color:var(--secondary);
+      font-weight:800;
+      margin-bottom:10px;
+    }
+
+    .section-head p{
+      color:var(--muted);
+      max-width:760px;
+      margin:0 auto;
+      line-height:1.8;
+    }
+
+    .contact-grid{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:24px;
+      margin-bottom:30px;
+    }
+
+    .contact-card{
+      background:rgba(255,255,255,0.97);
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      border-radius:26px;
+      padding:28px 24px;
+      transition:.28s;
+    }
+
+    .contact-card:hover{
+      transform:translateY(-8px);
+    }
+
+    .contact-icon{
+      width:60px;
+      height:60px;
+      border-radius:18px;
+      background:linear-gradient(135deg, rgba(239,62,91,.12), rgba(60,28,99,.12));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1.5rem;
+      margin-bottom:16px;
+    }
+
+    .contact-card h3{
+      color:var(--secondary);
+      font-size:1.2rem;
+      margin-bottom:10px;
+      font-weight:700;
+    }
+
+    .contact-card p{
+      color:var(--muted);
+      line-height:1.8;
+      font-size:.96rem;
+      margin-bottom:8px;
+    }
+
+    .contact-card a{
+      color:var(--primary);
+      font-weight:700;
+      word-break:break-word;
+    }
+
+    .contact-card a:hover{
+      text-decoration:underline;
+    }
+
+    .contact-wrapper{
+      display:grid;
+      grid-template-columns:1.1fr 0.9fr;
+      gap:24px;
+      margin-top:12px;
+    }
+
+    .contact-form-box,
+    .support-box{
+      background:rgba(255,255,255,0.97);
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      border-radius:28px;
+      padding:34px 28px;
+    }
+
+    .contact-form-box h2,
+    .support-box h2{
+      color:var(--secondary);
+      font-size:1.8rem;
+      margin-bottom:12px;
+      font-weight:800;
+    }
+
+    .contact-form-box p,
+    .support-box p{
+      color:var(--muted);
+      line-height:1.8;
+      margin-bottom:18px;
+    }
+
+    .form-group{
+      margin-bottom:18px;
+    }
+
+    .form-group label{
+      display:block;
+      font-weight:600;
+      margin-bottom:8px;
+      color:#423a56;
+    }
+
+    .form-group input,
+    .form-group textarea{
+      width:100%;
+      padding:15px 16px;
+      border-radius:16px;
+      border:1px solid #ddd8ea;
+      outline:none;
+      font-size:15px;
+      transition:.3s;
+      background:#fff;
+      color:var(--text);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus{
+      border-color:var(--primary);
+      box-shadow:0 0 0 4px rgba(239,62,91,0.10);
+    }
+
+    .form-group textarea{
+      min-height:150px;
+      resize:vertical;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:none;
+      background:linear-gradient(135deg, var(--primary), #ff6c7d);
+      color:var(--white);
+      padding:14px 28px;
+      border-radius:999px;
+      font-size:16px;
+      font-weight:700;
+      cursor:pointer;
+      box-shadow:0 10px 24px rgba(239,62,91,0.24);
+      transition:.25s;
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .support-list{
+      margin-top:12px;
+    }
+
+    .support-item{
+      background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(252,249,255,.94));
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:16px 18px;
+      margin-bottom:14px;
+      transition:.25s;
+    }
+
+    .support-item:hover{
+      transform:translateX(4px);
+    }
+
+    .support-item strong{
+      display:block;
+      color:var(--secondary);
+      margin-bottom:6px;
+      font-size:1rem;
+    }
+
+    .support-item span,
+    .support-item a{
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .support-item a{
+      color:var(--primary);
+      font-weight:700;
+    }
+
+    .support-item a:hover{
+      text-decoration:underline;
+    }
+
+    footer{
+      background:#221533;
+      color:#d9d4e5;
+      text-align:center;
+      padding:26px 20px;
+      margin-top:70px;
+      border-top:1px solid rgba(255,255,255,.05);
+    }
+
+    footer span{
+      color:#ff6377;
+      font-weight:700;
+    }
+
+    @media (max-width:1200px){
+      .contact-grid{
+        grid-template-columns:repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width:900px){
+      .navbar{
+        flex-wrap:wrap;
+        justify-content:center;
+        padding:16px 0;
+      }
+
+      .nav-links{
+        width:100%;
+        justify-content:center;
+      }
+
+      .hero-card{
+        min-height:auto;
+        padding:60px 20px;
+      }
+
+      .contact-wrapper{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:640px){
+      .container{
+        width:min(100% - 24px, 1320px);
+      }
+
+      .logo{
+        font-size:1.7rem;
+      }
+
+      .nav-links{
+        gap:18px;
+        flex-wrap:wrap;
+      }
+
+      .nav-actions{
+        width:100%;
+        justify-content:center;
+      }
+
+      .hero{
+        padding-top:22px;
+      }
+
+      .hero-card{
+        border-radius:24px;
+        padding:48px 16px;
+      }
+
+      .badge{
+        font-size:.84rem;
+        padding:10px 16px;
+      }
+
+      .hero p{
+        font-size:1rem;
+      }
+
+      .contact-grid{
+        grid-template-columns:1fr;
+      }
+
+      .contact-form-box,
+      .support-box{
+        padding:24px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar-wrap">
+    <div class="container">
+      <div class="navbar">
+        <a href="/" class="logo">
+          <span class="logo-icon">🍕</span>
+          <span class="food">Food</span><span class="hut">Wala</span>
+        </a>
+
+        <div class="nav-links">
+          <a href="/">Home</a>
+          <a href="/AboutPage">Service</a>
+          <a href="/MenuButton">Foods</a>
+          <a href="/ContactPage" class="active">Contact</a>
+        </div>
+
+        <div class="nav-actions">
+          <button class="icon-btn" title="Cart">🛒</button>
+          <a href="/loginn" class="login-btn">Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-card">
+        <div class="floating f1">🌶️</div>
+        <div class="floating f2">🍔</div>
+        <div class="floating f3">🍰</div>
+        <div class="floating f4">🍕</div>
+
+        <div class="hero-content">
+          <div class="badge">
+            <span class="badge-dot"></span>
+            Customer Support & Help
+          </div>
+
+          <h1>Contact <span>FoodWala</span></h1>
+
+          <p>
+            We are here to help restaurants grow and customers enjoy their favorite meals with ease.
+            Reach out to our team for support, partnerships, or general inquiries.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section">
+    <div class="container">
+
+      <div class="section-head">
+        <h2>Get in Touch</h2>
+        <p>
+          Have a question, need support, or want to partner with FoodWala Private Limited?
+          Our team is always ready to assist you.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-icon">📞</div>
+          <h3>Call Us</h3>
+          <p>Speak with our support team for quick assistance.</p>
+          <p><a href="tel:18001234567">1800-123-4567</a></p>
+          <p>Toll-Free | Mon - Sat | 9:00 AM - 8:00 PM</p>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon">✉️</div>
+          <h3>Email Us</h3>
+          <p>Send us your query and we will get back to you soon.</p>
+          <p><a href="mailto:support@foodwala.com">support@foodwala.com</a></p>
+          <p><a href="mailto:partners@foodwala.com">partners@foodwala.com</a></p>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon">📍</div>
+          <h3>Office Address</h3>
+          <p>FoodWala Private Limited</p>
+          <p>2nd Floor, Sunrise Business Hub, Jaipur, Rajasthan, India</p>
+          <p><a href="#">View Location</a></p>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon">💬</div>
+          <h3>Live Support</h3>
+          <p>Need help with an order or restaurant listing?</p>
+          <p><a href="#">Start Live Chat</a></p>
+          <p>Fast response for customers and restaurant partners.</p>
+        </div>
+      </div>
+
+      <div class="contact-wrapper">
+        <div class="contact-form-box">
+          <h2>Send Us a Message</h2>
+          <p>
+            Fill out the form below and our team will contact you as soon as possible.
+          </p>
+
+          <form>
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" placeholder="Enter your full name">
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" placeholder="Enter your email address">
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="text" id="phone" placeholder="Enter your phone number">
+            </div>
+
+            <div class="form-group">
+              <label for="message">Your Message</label>
+              <textarea id="message" placeholder="Write your message here..."></textarea>
+            </div>
+
+            <button type="submit" class="btn">Send Message</button>
+          </form>
+        </div>
+
+        <div class="support-box">
+          <h2>Customer Support</h2>
+          <p>
+            Whether you are a food lover, restaurant owner, or delivery partner, we are here to support you.
+          </p>
+
+          <div class="support-list">
+            <div class="support-item">
+              <strong>General Support</strong>
+              <a href="mailto:support@foodwala.com">support@foodwala.com</a>
+            </div>
+
+            <div class="support-item">
+              <strong>Restaurant Partnerships</strong>
+              <a href="mailto:partners@foodwala.com">partners@foodwala.com</a>
+            </div>
+
+            <div class="support-item">
+              <strong>Toll-Free Helpline</strong>
+              <a href="tel:18001234567">1800-123-4567</a>
+            </div>
+
+            <div class="support-item">
+              <strong>Working Hours</strong>
+              <span>Monday to Saturday, 9:00 AM to 8:00 PM</span>
+            </div>
+
+            <div class="support-item">
+              <strong>Business Inquiries</strong>
+              <span>For collaborations, onboarding, and service-related discussions, connect with our partnership team.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 <span>FoodWala Private Limited</span>. All Rights Reserved.</p>
+  </footer>
+
+</body>
+</html>

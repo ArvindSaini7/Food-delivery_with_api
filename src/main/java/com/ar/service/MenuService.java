@@ -29,6 +29,18 @@ public class MenuService {
 	public List<Menu> getAllMenu() {
         return menuRepo.findAll();
     }
+	
+	public Menu Update(Menu menu){
+		return menuRepo.save(menu);
+	}
+	
+	public Menu getById(int id) {
+        return menuRepo.getById(id);
+    }
+	
+	public void delete(int id) {
+		menuRepo.deleteById(id);
+	}
 
 
 }

@@ -15,9 +15,74 @@ public class Orders {
     private Long id;
 
     private String foodName;
-    private int price;
+    private String restaurantName;
+    private String category;
+    private double price;
+    private int quantity;
+    private double total;
+    private String customerName;
+    private String paymentMethod;
+    private double cgst;
+    private double sgst;
+    private double hst;
+    private String deliveryLocation;
+    private String bikeNumber;
 
-    public Long getId() {
+    public String getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
+	public double getCgst() {
+		return cgst;
+	}
+
+	public void setCgst(double cgst) {
+		this.cgst = cgst;
+	}
+
+	public double getSgst() {
+		return sgst;
+	}
+
+	public void setSgst(double sgst) {
+		this.sgst = sgst;
+	}
+
+	public double getHst() {
+		return hst;
+	}
+
+	public void setHst(double hst) {
+		this.hst = hst;
+	}
+
+	public String getDeliveryLocation() {
+		return deliveryLocation;
+	}
+
+	public void setDeliveryLocation(String deliveryLocation) {
+		this.deliveryLocation = deliveryLocation;
+	}
+
+	public String getBikeNumber() {
+		return bikeNumber;
+	}
+
+	public void setBikeNumber(String bikeNumber) {
+		this.bikeNumber = bikeNumber;
+	}
+
+	@ManyToOne
+    private UserDetails user;
+
+    @CreationTimestamp
+    private LocalDateTime orderTime;
+
+	public Long getId() {
 		return id;
 	}
 
@@ -33,20 +98,52 @@ public class Orders {
 		this.foodName = foodName;
 	}
 
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
 	public String getRestaurantName() {
 		return restaurantName;
 	}
 
 	public void setRestaurantName(String restaurantName) {
 		this.restaurantName = restaurantName;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
 
 	public UserDetails getUser() {
@@ -64,15 +161,9 @@ public class Orders {
 	public void setOrderTime(LocalDateTime orderTime) {
 		this.orderTime = orderTime;
 	}
-
-	// ✅ NEW
-    private String restaurantName;
-
-    @ManyToOne
-    private UserDetails user;
-
-    @CreationTimestamp
-    private LocalDateTime orderTime;
+    
+    
+    
 
    
 }
