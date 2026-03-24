@@ -37,22 +37,29 @@ public class MenuController {
     @PostMapping("/addMenu")
     public String saveMenu(@ModelAttribute("menu") Menu menu,
                            @RequestParam("imageFile") MultipartFile imageFile,
-                           HttpSession session) throws IOException {
+                           HttpSession session) {
 
-        String restaurantName = (String) session.getAttribute("restaurantName");
+        try {
 
-        if (restaurantName == null) {
-            return "redirect:/login";
+            String restaurantName = (String) session.getAttribute("restaurantName");
+
+            if (restaurantName == null) {
+                return "redirect:/login";
+            }
+
+            menu.setRestaurantsName(restaurantName);
+
+            if (!imageFile.isEmpty()) {
+                String imageUrl = cloudinaryService.uploadImage(imageFile);
+                menu.setImage(imageUrl);
+            }
+
+            menuService.saveMenu(menu);
+
+        } catch (Exception e) {
+            e.printStackTrace();   // 🔥 IMPORTANT (console me error dikhega)
+            return "redirect:/add?error";
         }
-
-        menu.setRestaurantsName(restaurantName);
-
-        if (!imageFile.isEmpty()) {
-            String imageUrl = cloudinaryService.uploadImage(imageFile);
-            menu.setImage(imageUrl);
-        }
-
-        menuService.saveMenu(menu);
 
         return "redirect:/list";
     }
