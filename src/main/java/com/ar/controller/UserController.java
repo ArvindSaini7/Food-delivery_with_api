@@ -41,12 +41,7 @@ public class UserController {
 		return "userDetails";
 	}
 	
-//	@PostMapping("/userDetails")
-//	public String addUser(@ModelAttribute UserDetails details) {
-//		userDetaileSerview.saveDetails(details);
-//		return "foodlist";
-//		
-//	}
+
 	@PostMapping("/userDetails")
 	public String saveUser(@ModelAttribute UserDetails details, HttpSession session) {
 		userDetaileSerview.saveDetails(details);

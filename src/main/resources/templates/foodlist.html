@@ -1175,8 +1175,8 @@
                 <p>Select your portal to continue with Food Hut.</p>
 
                 <div class="modal-list">
-                    <a href="http://localhost:8182/userDetails" class="modal-list-item">👤 User Login / Register</a>
-                    <a href="http://localhost:8182/loginn" class="modal-list-item">🍽️ Restaurant Login</a>
+                    <a href="/userDetails" class="modal-list-item">👤 User Login / Register</a>
+                    <a href="/loginn" class="modal-list-item">🍽️ Restaurant Login</a>
                 </div>
             </div>
 
@@ -1211,7 +1211,7 @@
     let allFoods = [];
 
     function goToOrder(foodId) {
-        window.location.href = "http://localhost:8182/order-food/" + foodId;
+        window.location.href = "/order-food/" + foodId;
     }
 
     function renderFoods(data) {
@@ -1255,7 +1255,7 @@
         });
     }
 
-    fetch("http://localhost:8182/all")
+    fetch("/all")
         .then(res => {
             if (!res.ok) {
                 throw new Error("HTTP error " + res.status);
