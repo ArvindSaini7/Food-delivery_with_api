@@ -1,13 +1,11 @@
-FROM eclipse-temurin:17-jdk
-
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
-
 COPY . .
+RUN mvn clean package -DskipTests
 
-RUN chmod +x mvnw
-
-RUN ./mvnw clean package -DskipTests
-
+# Run
+FROM eclipse-temurin:17-jdk
+WORKDIR /app
+COPY --from=build /app/target/*.war app.war
 EXPOSE 8080
-
-CMD ["java","-jar","target/Springboot_tesing-1.0.war"]
+ENTRYPOINT ["sh", "-c", "java -Dserver.port=${PORT:-8080} -jar app.war"]
