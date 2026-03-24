@@ -31,7 +31,7 @@ public class MenuController {
     @GetMapping("/add")
     public String addItem(Model model) {
         model.addAttribute("menu", new Menu());
-        return "redirect:/addMenu";
+        return "addMenu";
     }
 
     @PostMapping("/addMenu")
