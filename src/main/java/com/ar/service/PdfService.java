@@ -40,7 +40,7 @@ public class PdfService {
         double subtotal = order.getPrice() * order.getQuantity();
         double cgst = subtotal * 0.025;   // 2.5%
         double sgst = subtotal * 0.025;   // 2.5%
-        double hst = subtotal * 0.01;     // 1%
+        double hst = subtotal * 0.02;     // 1%
         double grandTotal = subtotal + cgst + sgst + hst;
 
         String paymentMethod = "Cash";
@@ -50,7 +50,7 @@ public class PdfService {
         String restaurantLocation = order.getRestaurantName() + ", Main City Branch";
 
         // ===== Title =====
-        Paragraph title = new Paragraph("FOOD HUT INVOICE", titleFont);
+        Paragraph title = new Paragraph("FOOD Wala INVOICE", titleFont);
         title.setAlignment(Element.ALIGN_CENTER);
         document.add(title);
 
@@ -125,7 +125,7 @@ public class PdfService {
         addSummaryRow(totalTable, "Subtotal", "Rs. " + format(subtotal), boldFont, textFont);
         addSummaryRow(totalTable, "CGST (2.5%)", "Rs. " + format(cgst), boldFont, textFont);
         addSummaryRow(totalTable, "SGST (2.5%)", "Rs. " + format(sgst), boldFont, textFont);
-        addSummaryRow(totalTable, "HST (1%)", "Rs. " + format(hst), boldFont, textFont);
+        addSummaryRow(totalTable, "Delivery charges", "Rs. " + format(hst), boldFont, textFont);
         addSummaryRow(totalTable, "Grand Total", "Rs. " + format(grandTotal), totalFont, totalFont);
 
         document.add(totalTable);
