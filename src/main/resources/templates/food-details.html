@@ -88,8 +88,8 @@
                 <div class="tag" th:text="${food.category}"></div>
                 <p><strong>Restaurant:</strong> <span th:text="${food.restaurantsName}"></span></p>
                 <div class="price">₹ <span th:text="${food.MRP}"></span></div>
-
-                <form action="/confirmOrder" method="post">
+<form action="/confirmOrder" method="post" target="_blank" onsubmit="redirectHome()">
+               
                     <input type="hidden" name="foodId" th:value="${food.id}">
 
                     <div class="form-group">
@@ -103,12 +103,13 @@
         </div>
     </div>
     
-    <script>
+   <script>
 function redirectHome() {
     setTimeout(() => {
         window.location.href = "/";
     }, 1000); // 1 second baad redirect
 }
 </script>
+
 </body>
 </html>
