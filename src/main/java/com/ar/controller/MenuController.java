@@ -149,6 +149,6 @@ public class MenuController {
         model.addAttribute("food", food);
         model.addAttribute("username", user.getUsername());
 
-        return "/";
+        return "food-details";
     }  
 }
